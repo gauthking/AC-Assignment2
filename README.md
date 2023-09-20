@@ -1,5 +1,5 @@
 # AC-Assignment - 3
-Code is done, but i was facing an error - https://snack.expo.dev/JSx2JAs6_
+Code is done, but i was facing an error - [https://snack.expo.dev/JSx2JAs6_](https://snack.expo.dev/VwwXxtvBB)
 
 ## Tab Navigation
 
