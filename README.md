@@ -1,6 +1,5 @@
 # AC-Assignment - 3
-Code is done, but i was facing an error - [https://snack.expo.dev/JSx2JAs6_](https://snack.expo.dev/VwwXxtvBB)
-
+https://snack.expo.dev/VwwXxtvBB
 ## Tab Navigation
 
 ![image](https://github.com/gauthking/AC-Assignments/assets/90638995/b3ed2402-d5a4-4fcb-9170-d6142d6554a7)
