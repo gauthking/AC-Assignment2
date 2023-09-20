@@ -1,4 +1,6 @@
-# AC-Assignment2
+# AC-Assignment - 3
+Code is done, but i was facing an error - https://snack.expo.dev/JSx2JAs6_
+
 ![image](https://github.com/gauthking/AC-Assignment2/assets/90638995/a2bad958-cc15-45df-b834-a5b3b81eb631)
 
 ![image](https://github.com/gauthking/AC-Assignment2/assets/90638995/8011cf42-f3c5-4295-801a-fefe205ae2b9)
