@@ -1,23 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ToastAndroid,
-  KeyboardAvoidingView,
-} from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GetScreen } from './screens/GetScreen';
+import { PostScreen } from './screens/PostScreen';
+import { PutScreen } from './screens/PutScreen';
+import { DeleteScreen } from './screens/DeleteScreen';
+import { useState } from 'react';
+import { View } from 'react-native';
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
+
+function About() {
+  return (
+    <View>
+      <Text>About</Text>
+    </View>)
+}
+
+function Home() {
   const [id, setID] = useState(2);
   const [getName, setGetName] = useState("");
   const [name, setName] = useState("");
   const [salary, setSalary] = useState("");
   const [age, setAge] = useState("");
-
-  const [showMethod, setShowMethod] = useState(null);
 
   const getUser = () => {
     fetch(`https://dummy.restapiexample.com/api/v1/employee/${id}`)
@@ -30,12 +36,12 @@ export default function App() {
   const postUser = () => {
     fetch(`https://dummy.restapiexample.com/api/v1/create`, {
       method: "POST",
-      body: {
+      body: JSON.stringify({
         employee_name: name,
         employee_salary: parseInt(salary),
         employee_age: parseInt(age),
         profile_image: ""
-      },
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -52,10 +58,10 @@ export default function App() {
   const updateUser = () => {
     fetch(`https://dummy.restapiexample.com/api/v1/update/${id}`, {
       method: "PUT",
-      body: {
+      body: JSON.stringify({
         name: name,
-        job: job,
-      },
+        job: job, // Please define job variable
+      }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -77,172 +83,45 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      {showMethod === null && <Text style={styles.header}>API</Text>}
-      {showMethod === "GET" && (
-        <View style={styles.methodContainer}>
-          <Text style={styles.header}>GET Route</Text>
-          <TextInput
-            placeholder="ID"
-            style={styles.input}
-            value={id}
-            onChangeText={setID}
-          />
-          <Button
-            title="Fetch"
-            style={styles.button}
-            onPress={getUser}
-            color="#6EB4D5"
-          />
-          <Text>Name: {getName}</Text>
-        </View>
-      )}
-      {showMethod === "POST" && (
-        <View style={styles.methodContainer}>
-          <Text style={styles.header}>POST method!</Text>
-          <TextInput
-            placeholder="Name"
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-          />
-          <TextInput
-            placeholder="Salary"
-            style={styles.input}
-            value={salary}
-            onChangeText={setSalary}
-          />
-          <TextInput
-            placeholder="Age"
-            style={styles.input}
-            value={age}
-            onChangeText={setAge}
-          />
-          <Button
-            title="Post"
-            style={styles.button}
-            onPress={postUser}
-            color="#6EB4D5"
-          />
-        </View>
-      )}
-
-      {showMethod === "PUT" && (
-        <View style={styles.methodContainer}>
-          <Text style={styles.header}>PUT method!</Text>
-          <TextInput
-            placeholder="Name"
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-          />
-          <TextInput
-            placeholder="Salary"
-            style={styles.input}
-            value={salary}
-            onChangeText={setSalary}
-          />
-          <TextInput
-            placeholder="Age"
-            style={styles.input}
-            value={age}
-            onChangeText={setAge}
-          />
-          <Button
-            title="Post"
-            style={styles.button}
-            onPress={updateUser}
-            color="#6EB4D5"
-          />
-        </View>
-      )}
-      {showMethod === "DELETE" && (
-        <View style={styles.methodContainer}>
-          <Text style={styles.header}>DELETE method!</Text>
-          <TextInput
-            placeholder="Id"
-            style={styles.input}
-            value={id}
-            onChangeText={setID}
-          />
-          <Button
-            title="Post"
-            style={styles.button}
-            onPress={deleteUser}
-            color="#6EB4D5"
-          />
-        </View>
-      )}
-      <View style={styles.optionsButton}>
-        <Button
-          title="GET"
-          style={styles.button}
-          onPress={() => setShowMethod("GET")}
-          color="#6EB4D5"
-        />
-
-        <Button
-          title="POST"
-          style={styles.button}
-          onPress={() => setShowMethod("POST")}
-          color="#6EB4D5"
-        />
-
-        <Button
-          title="PUT"
-          style={styles.button}
-          onPress={() => setShowMethod("PUT")}
-          color="#6EB4D5"
-        />
-
-        <Button
-          title="DELETE"
-          style={styles.button}
-          onPress={() => setShowMethod("DELETE")}
-          color="#6EB4D5"
-        />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="GET">
+          {() => <GetScreen id={id} setID={setID} getName={getName} getUser={getUser} />}
+        </Tab.Screen>
+        <Tab.Screen name="POST">
+          {() => <PostScreen name={name} setName={setName} salary={salary} setSalary={setSalary} age={age} setAge={setAge} postUser={postUser} />}
+        </Tab.Screen>
+        <Tab.Screen name="PUT">
+          {() => <PutScreen name={name} setName={setName} salary={salary} setSalary={setSalary} age={age} setAge={setAge} updateUser={updateUser} />}
+        </Tab.Screen>
+        <Tab.Screen name="DELETE">
+          {() => <DeleteScreen id={id} setID={setID} deleteUser={deleteUser} />}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  header: {
-    fontSize: 40,
-    fontWeight: "900",
-    color: "black",
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "violet",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    height: 40,
-    backgroundColor: "red"
+function MyDrawer() {
+  return (
+    <Drawer.Navigator initialRouteName="Feed">
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        options={{ drawerLabel: 'Home' }}
+      />
+      <Drawer.Screen
+        name="Notifications"
+        component={About}
+        options={{ drawerLabel: 'About' }}
+      />
+    </Drawer.Navigator>
+  );
+}
 
-  },
-  input: {
-    borderWidth: 5,
-    borderRadius: 12,
-    width: 300,
-    margin: 10,
-    borderStyle: "solid",
-    borderColor: "white",
-    fontSize: 20,
-    padding: 10,
-  },
 
-  optionsButton: {
-    flexDirection: "row",
-    gap: 10,
-    position: "absolute",
-    bottom: 60,
-  },
-  methodContainer: {
-    position: "absolute",
-    top: 70,
-  },
-});
+export default function App() {
+  return (
+    <Home />
+  );
+}
