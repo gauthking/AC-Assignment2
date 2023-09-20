@@ -1,8 +1,13 @@
 # AC-Assignment - 3
 Code is done, but i was facing an error - https://snack.expo.dev/JSx2JAs6_
 
-![image](https://github.com/gauthking/AC-Assignment2/assets/90638995/a2bad958-cc15-45df-b834-a5b3b81eb631)
+## Tab Navigation
 
-![image](https://github.com/gauthking/AC-Assignment2/assets/90638995/8011cf42-f3c5-4295-801a-fefe205ae2b9)
+![image](https://github.com/gauthking/AC-Assignments/assets/90638995/b3ed2402-d5a4-4fcb-9170-d6142d6554a7)
 
-![image](https://github.com/gauthking/AC-Assignment2/assets/90638995/425f89ef-2300-457e-a02b-8d26284089bd)
+![image](https://github.com/gauthking/AC-Assignments/assets/90638995/50f9b90b-aeab-474f-994d-76b4c9534667)
+
+
+## Drawer Nav:
+
+Code is done, but its giving some errors
